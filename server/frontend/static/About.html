@@ -1,9 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Link the style sheet here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Best Cars Dealership</title>
+  
+  <!-- Link the style sheets -->
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
 </head>
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: darkturquoise; height: 1in;">
     <div class="container-fluid">
       <h2 style="padding-right: 5%;">Dealerships</h2>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,44 +33,54 @@
     </div>
   </nav>
   
-    <div class="card" style="width: 80%;margin: auto; margin-top:5%;">
-      <div class="banner" name="about-header">
-      <!-- Insert header information here -->
-      </div>
-      <div style="display: flex;flex-direction: row; margin:auto">
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person1</p>
-          <p>Person1 Title</p>
-          <p class="card-text">Some text that explains the person1 in about 2 short sentences</p>
-          <p>person1@example.com</p>
-        </div>
-      </div>
-
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person2</p>
-          <p>Person2 Title</p>
-          <p class="card-text">Some text that explains the person2 in about 2 short sentences</p>
-          <p>person2@example.com</p>
-        </div>
-      </div>
-
-      <div class="card" style="width: 30%;">
-        <img class="card-img-top" src="/static/person.png" alt="Card image">
-        <div class="card-body">
-          <p class="title">Person3</p>
-          <p>Person3 Title</p>
-          <p class="card-text">Some text that explains the person3 in about 2 short sentences</p>
-          <p>person3@example.com</p>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
+  <div class="card" style="width: 80%; margin: auto; margin-top: 5%;">
     
-</div>
+    <div class="banner" name="about-header" style="text-align: center; padding: 20px;">
+      <h1>About Us</h1>
+      <p>Welcome to <strong>Best Cars Dealership</strong>, home to the finest selection of vehicles in North America.  
+      We specialize in selling high-quality domestic and imported cars at competitive prices.  
+      With decades of experience in the automotive industry, we prioritize customer satisfaction and  
+      offer excellent after-sales services.</p>
+    </div>
 
+    <h2 style="text-align: center; margin-top: 20px;">Meet Our Team</h2>
+
+    <div style="display: flex; flex-direction: row; justify-content: center; gap: 20px; margin:auto">
+      
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://thumbs.dreamstime.com/b/business-woman-working-laptop-computer-office-63543303.jpg" alt="Samridha - Sales Manager">
+        <div class="card-body">
+          <p class="title"><strong>Samridha</strong></p>
+          <p>Sales Manager</p>
+          <p class="card-text">With over 10 years of experience in the auto industry,  
+          Samridha ensures our customers get the best deals.</p>
+          <p>Email: <a href="mailto:samridha@gmail.com">samridha@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://img.freepik.com/free-photo/young-man-happy-expression-business-desk-company-concept-ai-generated_1194-589229.jpg" alt="Shyam - Head Manager">
+        <div class="card-body">
+          <p class="title"><strong>Shyam</strong></p>
+          <p>Head Manager</p>
+          <p class="card-text">A dedicated leader, Shyam ensures smooth dealership operations and top-notch customer service.</p>
+          <p>Email: <a href="mailto:shyamideal@gmail.com">shyamideal@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="card" style="width: 30%;">
+        <img class="card-img-top" src="https://www.shutterstock.com/image-photo/portrait-beautiful-young-intelligentlooking-indian-260nw-1433736386.jpg" alt="Deebika - AI Engineer">
+        <div class="card-body">
+          <p class="title"><strong>Deebika</strong></p>
+          <p>AI Engineer</p>
+          <p class="card-text">Passionate about AI-driven innovations, Deebika enhances the dealership experience  
+          with intelligent solutions.</p>
+          <p>Email: <a href="mailto:sankarideebika18@gmail.com">sankarideebika18@gmail.com</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  
+</body>
 </html>
