@@ -63,15 +63,30 @@ const PostReview = () => {
 
   }
   const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      if(dealerobjs.length > 0)
-        setDealer(dealerobjs[0])
+    try {
+      const res = await fetch(dealer_url, {
+        method: "GET"
+      });
+      const retobj = await res.json();
+      
+      if(retobj.status === 200) {
+        // Check if dealer is an array or object and handle accordingly
+        if (Array.isArray(retobj.dealer)) {
+          let dealerobjs = Array.from(retobj.dealer)
+          if(dealerobjs.length > 0) {
+            console.log('Dealer found:', dealerobjs[0]);
+            setDealer(dealerobjs[0]);
+          }
+        } else if (typeof retobj.dealer === 'object') {
+          // If it's a single object, use it directly
+          console.log('Dealer found (object):', retobj.dealer);
+          setDealer(retobj.dealer);
+        } else {
+          console.error('Unexpected dealer data format:', retobj.dealer);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching dealer:', error);
     }
   }
 
@@ -91,31 +106,77 @@ const PostReview = () => {
 
 
   return (
-    <div>
+    <div style={{margin: 0, padding: 0}}>
       <Header/>
-      <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
-      <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
-      <div className='input_field'>
-      Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
-      </div>
-      <div className='input_field'>
-      Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
-      <option value="" selected disabled hidden>Choose Car Make and Model</option>
-      {carmodels.map(carmodel => (
-          <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
-      ))}
-      </select>        
-      </div >
+      <div style={{margin:"3%", padding: "20px", backgroundColor: "#f8f9fa", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0,0,0,0.1)"}}>
+        <h1 style={{color:"#2c3e50", marginBottom: "20px"}}>{dealer.full_name ? `Review for ${dealer.full_name}` : 'Loading dealer information...'}</h1>
+        
+        <div style={{marginBottom: "20px"}}>
+          <label htmlFor="review" style={{display: "block", marginBottom: "8px", fontWeight: "bold"}}>Your Review:</label>
+          <textarea 
+            id='review' 
+            placeholder="Write your review here..."
+            style={{width: "100%", padding: "10px", borderRadius: "4px", border: "1px solid #ddd"}}
+            rows='7' 
+            onChange={(e) => setReview(e.target.value)}
+          ></textarea>
+        </div>
+        
+        <div className='input_field' style={{marginBottom: "15px"}}>
+          <label style={{display: "block", marginBottom: "8px", fontWeight: "bold"}}>Purchase Date:</label>
+          <input 
+            type="date" 
+            onChange={(e) => setDate(e.target.value)}
+            style={{padding: "8px", borderRadius: "4px", border: "1px solid #ddd", width: "100%"}}
+          />
+        </div>
+        
+        <div className='input_field' style={{marginBottom: "15px"}}>
+          <label style={{display: "block", marginBottom: "8px", fontWeight: "bold"}}>Car Make & Model:</label>
+          <select 
+            name="cars" 
+            id="cars" 
+            onChange={(e) => setModel(e.target.value)}
+            style={{padding: "8px", borderRadius: "4px", border: "1px solid #ddd", width: "100%"}}
+          >
+            <option value="" selected disabled hidden>Choose Car Make and Model</option>
+            {carmodels.map((carmodel, index) => (
+              <option key={index} value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
+            ))}
+          </select>        
+        </div>
 
-      <div className='input_field'>
-      Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
-      </div>
+        <div className='input_field' style={{marginBottom: "20px"}}>
+          <label style={{display: "block", marginBottom: "8px", fontWeight: "bold"}}>Car Year:</label>
+          <input 
+            type="number" 
+            placeholder="Enter year (2015-2023)"
+            onChange={(e) => setYear(e.target.value)} 
+            max={2023} 
+            min={2015}
+            style={{padding: "8px", borderRadius: "4px", border: "1px solid #ddd", width: "100%"}}
+          />
+        </div>
 
-      <div>
-      <button className='postreview' onClick={postreview}>Post Review</button>
-      </div>
+        <div style={{textAlign: "center", marginTop: "20px"}}>
+          <button 
+            onClick={postreview}
+            style={{
+              backgroundColor: "#3498db", 
+              color: "white", 
+              padding: "10px 20px", 
+              border: "none", 
+              borderRadius: "4px", 
+              fontSize: "16px",
+              cursor: "pointer",
+              transition: "background-color 0.3s"
+            }}
+            onMouseOver={(e) => e.target.style.backgroundColor = "#2980b9"}
+            onMouseOut={(e) => e.target.style.backgroundColor = "#3498db"}
+          >
+            Submit Review
+          </button>
+        </div>
     </div>
     </div>
   )
