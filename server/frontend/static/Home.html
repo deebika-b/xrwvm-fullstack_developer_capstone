@@ -7,7 +7,37 @@
 <script>
 
 const logout = async (e) => {
-//Include the code for logout here.
+    if (e) {
+        e.preventDefault();
+    }
+
+    try {
+        let username = sessionStorage.getItem('username');
+        if (!username) {
+            return false;
+        }
+
+        // First clear client-side session
+        sessionStorage.removeItem('username');
+        
+        // Show alert before making request
+        alert("Logging out "+username+"...");
+
+        // Make logout request
+        let logout_url = window.location.origin+"/djangoapp/logout";
+        await fetch(logout_url, {
+            method: "GET",
+            credentials: 'same-origin'
+        });
+
+        // Redirect after small delay
+        setTimeout(() => {
+            window.location.replace(window.location.origin);
+        }, 100);
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+    return false;
 };
 
 let checkSession = ()=>{
@@ -25,8 +55,7 @@ let checkSession = ()=>{
  }
 </script>
 </head>
-<body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+<body onload="checkSession()"><nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
   <div class="container-fluid">
     <h2 style="padding-right: 5%;">Dealerships</h2>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
